@@ -20,15 +20,13 @@ model User {
   password  String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  quizzes   Quiz[]
+
 }
 
 model Quiz {
   id          Int       @id @default(autoincrement())
   title       String
   description String
-  userId      Int?
-  user        User?      @relation(fields: [userId], references: [id])
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   questions   Question[]
@@ -36,18 +34,19 @@ model Quiz {
 
 model Question {
   id            Int       @id @default(autoincrement())
-  content       String
+  title         String
   options       Option[]  
-  correctOption Int
-  quizId        Int
-  quiz          Quiz      @relation(fields: [quizId], references: [id])
+  correctOption Int?
+  quizId        Int?
+  quiz          Quiz?     @relation(fields: [quizId], references: [id])
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  score         Int
 }
 
 model Option {
   id        Int       @id @default(autoincrement())
-  content   String    // Content of the option
-  question  Question  @relation(fields: [questionId], references: [id])
-  questionId Int      // Foreign key to the Question model
+  label   String  
+  question  Question?  @relation(fields: [questionId], references: [id])
+  questionId Int?      // Foreign key to the Question model
 }
