@@ -17,6 +17,14 @@ const createQuizSchema = z.object({
   ),
 });
 
+const quizResultSchema = z.array(
+  z.object({
+    questionId: z.number(),
+    optionId: z.number(),
+  })
+);
+
 module.exports = {
   createQuizSchema,
+  quizResultSchema,
 };

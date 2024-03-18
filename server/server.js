@@ -6,7 +6,10 @@ const {
   deleteQuiz,
   fetchQuizResults,
 } = require("./controllers/quiz");
-const { validateCreateQuizPayload } = require("./middlewares/validation");
+const {
+  validateCreateQuizPayload,
+  validateQuizResultPayload,
+} = require("./middlewares/validation");
 const cors = require("cors");
 
 const app = express();
@@ -16,7 +19,11 @@ app.use(cors());
 
 app.use(express.json());
 
-app.post("/api/quizzes/:id/results", fetchQuizResults);
+app.post(
+  "/api/quizzes/:id/results",
+  validateQuizResultPayload,
+  fetchQuizResults
+);
 
 app.post("/api/quizzes", validateCreateQuizPayload, createQuiz);
 
