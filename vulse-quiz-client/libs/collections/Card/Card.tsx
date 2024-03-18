@@ -13,7 +13,12 @@ import { ConfirmationModal } from "../ConfirmationModal";
 
 const Card: React.FC<CardProps> = ({ item, onButtonClick }) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
-  // const [alertMessage, setAlertMessage] = useState({ type: "", message: "" });
+  const [alertMessage, setAlertMessage] = useState({
+    value: false,
+    type: "",
+    message: "",
+  });
+
   const { refetch }: any = useQuery({
     queryKey: ["quizzes"],
     queryFn: () => axios.get(`${process.env.NEXT_PUBLIC_API_URL}/quizzes`),
@@ -23,6 +28,11 @@ const Card: React.FC<CardProps> = ({ item, onButtonClick }) => {
     mutationFn: (id: any) =>
       axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/quizzes/${id}`, id),
     onSuccess: (data) => {
+      setAlertMessage({
+        value: true,
+        type: "success",
+        message: data.data.message,
+      });
       setConfirmationModal(false);
     },
   });
@@ -31,8 +41,11 @@ const Card: React.FC<CardProps> = ({ item, onButtonClick }) => {
       await deleteQuizMutation.mutateAsync(quizId);
       await refetch();
     } catch (error) {
-      // setAlertMessage({ type: "error", message: error });
-      console.error("Error deleting quiz:", error);
+      setAlertMessage({
+        value: true,
+        type: "error",
+        message: error,
+      });
     }
   };
   return (
@@ -66,7 +79,9 @@ const Card: React.FC<CardProps> = ({ item, onButtonClick }) => {
         </Button>
       </Container>
 
-      {/* <Alert type={alertMessage.type} message={alertMessage.message} /> */}
+      {alertMessage.value && (
+        <Alert type={alertMessage.type} message={alertMessage.message} />
+      )}
       <ConfirmationModal
         isOpen={confirmationModal}
         onConfirm={() => handleDeleteQuiz(item.id)}

@@ -9,13 +9,11 @@ const Alert: React.FC<AlertProps> = ({ type, message }) => {
       setShowAlert(false);
     }, 3000);
 
-    // Clear the timeout when the component unmounts or showAlert changes
     return () => clearTimeout(timeout);
   }, []);
   let bgColorClass = "";
   let textColorClass = "";
 
-  // Determine background and text color classes based on the alert type
   switch (type) {
     case "success":
       bgColorClass = "bg-green-100";
@@ -36,8 +34,11 @@ const Alert: React.FC<AlertProps> = ({ type, message }) => {
 
   return (
     showAlert && (
-      <Container className={`p-4 rounded-md ${bgColorClass} ${textColorClass}`}>
-        <Text>{message}</Text>
+      <Container
+        className={` border ${bgColorClass} ${textColorClass} px-4 py-3 rounded absolute top-0 right-0`}
+      >
+        <Text className="font-bold capitalize">{type}</Text>
+        <Text className="block sm:inline">{message}</Text>
       </Container>
     )
   );

@@ -10,6 +10,7 @@ import {
   MainContainer,
   Container,
   FlexContainer,
+  Alert,
 } from "@libs/components";
 import { useState } from "react";
 import axios from "axios";
@@ -23,6 +24,11 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
     questions: [],
   });
   const [questionValues, setQuestionValues] = useState([]);
+  const [alertMessage, setAlertMessage] = useState({
+    value: false,
+    type: "",
+    message: "",
+  });
 
   const { refetch }: any = useQuery({
     queryKey: ["quizzes"],
@@ -92,7 +98,11 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
       await createQuizMutation.mutateAsync(formData);
       await refetch();
     } catch (error) {
-      console.error("Error creating quiz:", error);
+      setAlertMessage({
+        value: true,
+        type: "success",
+        message: error,
+      });
     }
   };
 
@@ -210,6 +220,9 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
           </Container>
         </Container>
       </Container>
+      {alertMessage.value && (
+        <Alert type={alertMessage.type} message={alertMessage.message} />
+      )}
     </Container>
   );
 };

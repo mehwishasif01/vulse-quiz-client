@@ -16,7 +16,6 @@ const QuizListPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [quizData, setQuizData] = useState<Quiz>();
-  // const [alertMessage, setAlertMessage] = useState({ type: "", message: "" });
 
   const { data }: any = useQuery({
     queryKey: ["quizzes"],

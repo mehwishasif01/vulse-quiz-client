@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Container,
   FlexContainer,
@@ -17,6 +18,11 @@ const QuizModal: React.FC<QuizModalProps> = ({ isOpen, onClose, data }) => {
   const [resultModal, setResultModal] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [resultData, setResultData] = useState<Result>();
+  const [alertMessage, setAlertMessage] = useState({
+    value: false,
+    type: "",
+    message: "",
+  });
 
   useEffect(() => {
     setFormData(data);
@@ -72,7 +78,11 @@ const QuizModal: React.FC<QuizModalProps> = ({ isOpen, onClose, data }) => {
     try {
       await updateQuizMutation.mutateAsync(questions);
     } catch (error) {
-      console.error("Error creating quiz:", error);
+      setAlertMessage({
+        value: true,
+        type: "success",
+        message: error,
+      });
     }
   };
 
@@ -164,6 +174,9 @@ const QuizModal: React.FC<QuizModalProps> = ({ isOpen, onClose, data }) => {
           onClose={() => handleClose()}
           data={resultData}
         />
+        {alertMessage.value && (
+          <Alert type={alertMessage.type} message={alertMessage.message} />
+        )}
       </Container>
     )
   );
