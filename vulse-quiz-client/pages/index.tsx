@@ -8,10 +8,12 @@ export default function Home() {
   const router = useRouter();
   return (
     <MainContainer
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+      className={`w-full min-h-screen flex-col items-center justify-between ${inter.className}`}
     >
       <Container className="bg-purple-100 h-screen flex flex-col justify-center items-center">
-        <Text className="text-4xl font-bold mb-8">Welcome to Quizzi</Text>
+        <Text className="text-purple-700 text-4xl font-bold mb-8">
+          Welcome to Quizzi
+        </Text>
         <Text>
           Embark on your quiz journey today! Start creating and conquering
           quizzes with us.
