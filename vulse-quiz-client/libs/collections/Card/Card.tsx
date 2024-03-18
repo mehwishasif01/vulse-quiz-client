@@ -65,9 +65,7 @@ const Card: React.FC<CardProps> = ({ item, onButtonClick }) => {
           Start
         </Button>
       </Container>
-      <Container className={`p-4 rounded-md ${"bg-yellow"} ${"bg-red"}`}>
-        {/* <Text>{"hello"}</Text> */}
-      </Container>
+
       {/* <Alert type={alertMessage.type} message={alertMessage.message} /> */}
       <ConfirmationModal
         isOpen={confirmationModal}

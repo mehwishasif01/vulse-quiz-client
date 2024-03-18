@@ -53,7 +53,7 @@ const QuizListPage = () => {
                 onClick={onCreateQuizButtonClick}
                 className="bg-purple-600 text-white px-6 py-3 rounded-full hover:bg-purple-700"
               >
-                Let's Create!
+                Create Quiz
               </Button>
             )}
           </FlexContainer>
