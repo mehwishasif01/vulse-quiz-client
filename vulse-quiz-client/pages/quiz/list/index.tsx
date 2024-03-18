@@ -42,19 +42,7 @@ const QuizListPage = () => {
 
   return (
     <FlexContainer className="flex flex-col md:flex-row h-screen">
-      {/* <div className="md:w-20 lg:w-48 bg-white border-red-600">
-        <div className="p-4">
-          <h1 className="text-2xl font-bold">Quizzi</h1>
-
-          <div className="mt-4 md:mt-8 lg:mt-12">
-            <h3 className="text-sm md:text-base lg:text-lg">username</h3>
-            <h3 className="text-sm md:text-base lg:text-lg">email</h3>
-          </div>
-        </div>
-      </div> */}
-
-      {/* Main content */}
-      <FlexContainer className="flex-1 bg-gray-100">
+      <FlexContainer className="flex-1  bg-purple-50 w-screen">
         <Container className="p-8 w-full">
           <FlexContainer className="flex justify-between items-center flex-wrap mb-8">
             <Text className="text-3xl font-bold text-purple-600 mb-4 max-w-1/2">
@@ -104,7 +92,6 @@ const QuizListPage = () => {
         onClose={handleCloseModal}
         data={quizData}
       />
-      {/* <Alert type={""} message={""} /> */}
     </FlexContainer>
   );
 };

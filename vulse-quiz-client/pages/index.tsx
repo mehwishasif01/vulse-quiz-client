@@ -1,23 +1,29 @@
 import { Inter } from "next/font/google";
-import { useQuery, useIsFetching } from "@tanstack/react-query";
+import { Button, Container, MainContainer, Text } from "@libs/components";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { data, isLoading, error } = useQuery<any>({
-    queryKey: ["todos"],
-    queryFn: () =>
-      fetch("https://jsonplaceholder.typicode.com/todos").then((res) =>
-        res.json()
-      ),
-  });
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
+  const router = useRouter();
   return (
-    <main
+    <MainContainer
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    ></main>
+    >
+      <Container className="bg-purple-100 h-screen flex flex-col justify-center items-center">
+        <Text className="text-4xl font-bold mb-8">Welcome to Quizzi</Text>
+        <Text>
+          Embark on your quiz journey today! Start creating and conquering
+          quizzes with us.
+        </Text>
+
+        <Button
+          className="mt-8 bg-transparent hover:bg-purple-500 text-purple-700 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded"
+          onClick={() => router.push("/quiz/list")}
+        >
+          Let's Get Started{" "}
+        </Button>
+      </Container>
+    </MainContainer>
   );
 }
