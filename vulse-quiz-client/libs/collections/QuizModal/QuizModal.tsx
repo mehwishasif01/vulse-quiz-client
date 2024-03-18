@@ -76,8 +76,6 @@ const QuizModal: React.FC<QuizModalProps> = ({ isOpen, onClose, data }) => {
     }
   };
 
-  console.log(questions.length, "--", formData?.questions.length);
-
   return (
     isOpen && (
       <Container className="fixed z-10 inset-0 overflow-y-auto">
