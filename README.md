@@ -70,6 +70,15 @@ To run the project locally, follow these steps:
 - Both the client and server applications use environment variables for configuration.
 - Create a `.env` file in the root of each application directory (`vulse-quiz-client` and `server`) to define environment variables. Refer to `.env.example` files for required variables.
 
+**Database Connection:**
+
+- The application is using mysql database with Prisma ORM.
+- Make sure the DB is connected with the server and the tables are created in the database.
+  To run migrations
+  ```
+  npx prisma migrate dev --name migration_name
+  ```
+
 ## Usage
 
 **Client-side Application:**
