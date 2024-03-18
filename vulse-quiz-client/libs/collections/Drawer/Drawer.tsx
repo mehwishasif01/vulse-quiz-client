@@ -14,7 +14,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { QuestionCreate } from "../Quiz/Question";
+import { Question } from "../Quiz/Question";
 
 const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -56,7 +56,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
   const [questions, setQuestions] = useState([
     {
       comp: (index) => (
-        <QuestionCreate
+        <Question
           index={index}
           onSaveButtonClicked={onSaveButtonClicked}
           onRemoveButtonClicked={onRemoveButtonClicked}
@@ -70,7 +70,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
       ...prev,
       {
         comp: (index) => (
-          <QuestionCreate
+          <Question
             index={index}
             onSaveButtonClicked={onSaveButtonClicked}
             onRemoveButtonClicked={onRemoveButtonClicked}
@@ -101,8 +101,21 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
     setFormData({ title: "", description: "", questions: [] });
     setQuestionValues([]);
   };
-  const checkDisabled = () => {
-    return formData?.title === "" || formData?.description === "";
+
+  const checkDisabled = (obj) => {
+    return (
+      obj.title !== undefined &&
+      obj.description !== undefined &&
+      obj.questions !== undefined &&
+      obj.questions.length > 0 &&
+      obj.questions.every((question) => {
+        return (
+          question.options !== undefined &&
+          question.options.length > 0 &&
+          question.score !== undefined
+        );
+      })
+    );
   };
 
   return (
@@ -115,10 +128,10 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
           onClick={() => handleClose}
         ></Container>
         <Container className="absolute inset-y-0 right-0 pl-10 max-w-full flex">
-          <Container className="w-screen max-w-md">
+          <Container className="w-screen max-w-lg">
             <FlexContainer className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
               <MainContainer>
-                <FlexContainer className="justify-between items-center px-4 py-2">
+                <FlexContainer className="justify-between items-center mt-4 px-4 py-2">
                   <Text className=" text-xl ">Create New Quiz</Text>
                   <Button
                     onClick={handleClose}
@@ -128,12 +141,12 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
                   </Button>
                 </FlexContainer>
 
-                <Container className="mt-2 px-4 py-2">
+                <Container className="px-4 py-2">
                   <Text className=" text-xs text-gray-400">
                     Complete all fields to create the quiz.
                   </Text>
                 </Container>
-                <Form className="px-6 py-4">
+                <Form className="px-6 py-2">
                   <Input
                     label="Title *"
                     placeholder="Enter a title for your quiz."
@@ -183,11 +196,11 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
                   <Button
                     onClick={() => handleFormSubmit()}
                     className={
-                      checkDisabled()
+                      !checkDisabled(formData)
                         ? "opacity-50 cursor-not-allowed bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
                         : "bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
                     }
-                    disabled={checkDisabled()}
+                    disabled={!checkDisabled(formData)}
                   >
                     Create Quiz
                   </Button>

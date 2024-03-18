@@ -9,7 +9,7 @@ import {
   Text,
 } from "@libs/components";
 
-const QuestionCreate: React.FC<QuestionProps> = ({
+const Question: React.FC<QuestionProps> = ({
   onSaveButtonClicked,
   onRemoveButtonClicked,
   index,
@@ -73,7 +73,7 @@ const QuestionCreate: React.FC<QuestionProps> = ({
   };
 
   return (
-    <Container className="py-6">
+    <Container className="py-4">
       <Input
         label="Question *"
         placeholder="Enter your question"
@@ -171,4 +171,4 @@ const QuestionCreate: React.FC<QuestionProps> = ({
   );
 };
 
-export default QuestionCreate;
+export default Question;
