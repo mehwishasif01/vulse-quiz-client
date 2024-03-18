@@ -23,21 +23,20 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({
               </Button>
             </FlexContainer>
 
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-purple-600 mb-4">Score</h2>
-              <p className="text-lg text-green-500 mb-2">{data?.message}</p>
-              <p className="text-lg">
+            <Container className="text-center">
+              <Text className="text-2xl font-bold text-purple-600 mb-4">
+                Score
+              </Text>
+              <Text className="text-lg text-gray-400 mb-2">
+                {data?.message}
+              </Text>
+              <Text className="text-lg text-gray-400">
                 You scored{" "}
-                <span className="text-blue-500 font-bold">{data?.score}</span>{" "}
+                <Text className="text-purple-500 font-bold">{data?.score}</Text>{" "}
                 out of{" "}
-                <span className="text-blue-500 font-bold">{data?.total}</span>
-              </p>
-            </div>
-            {/* <Text className="text-xl font-bold mb-4">Score</Text>
-            <Text>{data?.message}</Text>
-            <Text>
-              You scored {data?.score} out of {data.total}
-            </Text> */}
+                <Text className="text-purple-500 font-bold">{data?.total}</Text>
+              </Text>
+            </Container>
           </Container>
         </FlexContainer>
       )}
