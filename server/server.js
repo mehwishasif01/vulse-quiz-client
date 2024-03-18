@@ -11,6 +11,7 @@ const {
   validateQuizResultPayload,
 } = require("./middlewares/validation");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT;
